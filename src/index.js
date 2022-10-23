@@ -1,21 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+
+
 
 import Header from './components/header';
-import FbxLoader from './components/fbxLoader';
-// import Words from './components/words';
+import Route from './components/route';
 
 import './components/css/header.css';
 
 
+
+// function App(){
+//   return (
+
+//   )
+// }
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <div className='Main'>
-    <Header />
-    <FbxLoader />
-    {/* <Words /> */}
-  </div>
+
+    <BrowserRouter>
+      <Header />
+
+        <Route />
+
+    </BrowserRouter>
+
 );
+
+
 
 reportWebVitals();
