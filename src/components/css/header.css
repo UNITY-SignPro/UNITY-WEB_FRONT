@@ -87,3 +87,11 @@ canvas {
     line-height: 24px;
     color: #FFFFFF;
 }
+
+
+
+.section1 {
+    position: absolute;
+    width: 99.1%;
+    text-align: center;
+}
