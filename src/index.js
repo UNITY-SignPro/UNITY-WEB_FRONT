@@ -11,13 +11,6 @@ import Route from './components/route';
 import './components/css/header.css';
 
 
-
-// function App(){
-//   return (
-
-//   )
-// }
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
