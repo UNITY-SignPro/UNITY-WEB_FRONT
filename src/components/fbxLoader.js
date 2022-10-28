@@ -2,15 +2,10 @@
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { useLocation, useParams } from 'react-router';
 import QueryString from 'qs';
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
-// import {  } from '@react-three/drei'
-
-// import other components
-import Viewer from './FbxViewer.js';
-
 // import css
 import "./css/fbx_loader.css";
+// import pages
+import Scene from "./fbxComponent";
 
 
 
@@ -25,14 +20,14 @@ export default function FbxLoader() {
 
   // state initializer
   const [splash, setSplash] = useState(false);
-  const [inputValue, setInputValue] = useState(true);
+  const [inputValue, setInputValue] = useState('default');
   const [model, setModel] = useState('test.glb');
 
   useEffect(() => {
     const queryData = QueryString.parse(location.search, { ignoreQueryPrefix: true });
     setInputValue(queryData.st ??= '');
     setSplash(!(queryData.st ??= false));
-    
+    setModel('test.glb');
     // axios get 받아오기
 
   }, [location.search, params]);
@@ -43,9 +38,17 @@ export default function FbxLoader() {
   function onChange(e) { setInputValue( e.target.value ); };
   // button click event
   function onClick(e) {
-    if (model == 'test.glb') { setModel('default.glb');
-    } else if (model == 'default.glb') { setModel('run.glb'); 
-    } else ( setModel('test.glb') );
+
+    if (model == 'run.glb') {
+      setModel('test.glb');
+      console.log("run.glb");
+    } else {
+      setModel('run.glb');
+      console.log("test.glb");
+    }
+    // if (model === 'test.glb') { setModel('default.glb');
+    // } else if (model === 'default.glb') { setModel('run.glb'); 
+    // } else ( setModel('test.glb') );
   };
 
   return (
@@ -57,14 +60,7 @@ export default function FbxLoader() {
 
       {/* FBX Viewer Section */}
       <div className="fbx_loader">
-        <Canvas style={{width: "758px", height: "433px"}} camera={{ position: [0, 0, 1.5], zoom: 2.5 }}>
-          <OrbitControls />
-          <ambientLight intensity={0.6} />
-          <directionalLight intensity={0.5} />
-          <Suspense fallback={null}>
-            <Viewer model={model} />
-          </Suspense>
-        </Canvas>
+        <Scene model={model} />
       </div>
 
 
@@ -77,4 +73,5 @@ export default function FbxLoader() {
   )
 }
 
-useGLTF.preload('/test.glb')
+
+
